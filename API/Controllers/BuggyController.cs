@@ -26,11 +26,25 @@ namespace API.Controllers
         }
 
         [HttpGet("server-error")]
-        public ActionResult<string> GetServerError()
+        public ActionResult<AppUser> GetServerError()
         {
-           var thing = context.Users.Find(-1) ??  throw new Exception("A bad thing has happened");
+            try
+            {
+                var thing = context.Users.Find(-1) ?? throw new Exception("A bad thing has happened");
 
-            return thing;
+                return thing;
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Computer says no!");
+            }
+        }
+
+        [HttpGet("bad-request")] // error 400
+        public ActionResult<AppUser> GetBadRequest()
+        {
+            return BadRequest("This was not a good request");
+
         }
     }
 }

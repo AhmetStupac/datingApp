@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { MembersService } from '../../_services/members.service';
+import { Member } from '../../_models/member';
 
 @Component({
   selector: 'app-member-list',
@@ -8,5 +10,18 @@ import { Component } from '@angular/core';
   styleUrl: './member-list.component.css'
 })
 export class MemberListComponent {
+private memberService = inject(MembersService)
+members: Member[] = [];
+
+ngOnInit() {
+  this.loadMembers();
+}
+
+loadMembers()
+{
+  this.memberService.getMembers().subscribe({
+    next: members=> this.members = members
+  })
+}
 
 }

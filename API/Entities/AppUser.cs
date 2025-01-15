@@ -21,8 +21,8 @@ public class AppUser
     public required string Country { get; set; }
     public List<Photo> Photos { get; set; }
 
-    public int getAge()
-    { 
-        return DateOfBirth.CalculateAge();
-    }
+    //public int getAge()
+    //{ 
+    //    return DateOfBirth.CalculateAge();
+    //}
 }

@@ -20,6 +20,10 @@ public class AppUser
     public required string City { get; set; }
     public required string Country { get; set; }
     public List<Photo> Photos { get; set; }
+    //messages
+    public List<Message> MessagesSent { get; set; } = [];
+    public List<Message> MessagesRecived { get; set; } = [];
+
 
     //public int getAge()
     //{ 

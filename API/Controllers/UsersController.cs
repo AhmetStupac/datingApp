@@ -13,7 +13,7 @@ namespace API.Controllers
     //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController(IUserRepository userRepository) : BaseApiController
+    public class UsersController(IUserRepository userRepository,IMapper mapper) : BaseApiController
     {
         [AllowAnonymous]
         [HttpGet]
@@ -21,7 +21,8 @@ namespace API.Controllers
         {
             var users = await userRepository.GetMembersAsync();
 
-            return Ok(users);
+            var usersToReturn = mapper.Map<IEnumerable<MemberDto>>(users);
+            return Ok(usersToReturn);
         }
 
 
@@ -33,7 +34,7 @@ namespace API.Controllers
             if (user == null)
                 return NotFound();
 
-            return user;
+            return mapper.Map<MemberDto>(user);
         }
     }
 }
